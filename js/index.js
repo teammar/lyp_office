@@ -96,6 +96,7 @@ $(document).ready(function(){
         newP('2822569653', '提供配套接口'),
         newP('1872605420', '应用中心的UI开发'),
         newP('1723260175', '小羽客服'),
+        newP('1562636521', '小栗子插件作者窗口人'),
     ]).then(res => {
         console.log(res);
         let $team = $('.team-section .wrapper .team-list').empty();
