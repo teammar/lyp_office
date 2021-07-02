@@ -95,8 +95,8 @@ $(document).ready(function () {
                     </li>`);
             });
             $sevice.append('<div class="clear"></div>');
-            $('#top #navigation .nav-cta').prop('href', res[0].downUri).prop('target', '_blank');
-            $('#banner .wrapper .buttons .button-1').prop('href', res[0].downUri).prop('target', '_blank');
+            $('#top #navigation .nav-cta').prop('href', `https://api.iyk0.com/lzyjx/?url=${res[0].downUri}&type=down`).prop('target', '_blank');
+            $('#banner .wrapper .buttons .button-1').prop('href', `https://api.iyk0.com/lzyjx/?url=${res[0].downUri}&type=down`).prop('target', '_blank');
         }
     }).catch(e => {
         alert(e);
