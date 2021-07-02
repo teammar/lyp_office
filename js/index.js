@@ -91,7 +91,7 @@ $(document).ready(function () {
                     </div>
                     <h5>${item.name}</h5>
                     <p style="text-align:left;" title="${item.body}">${item.body.substr(0, 100).replace(/\n/g, '<br>') + '...'}</p>
-                    <a href="${item.downUri}" target="_blank">下载</a>
+                    <a href="https://api.iyk0.com/lzyjx/?url=${item.downUri}&type=down" target="_blank">下载</a>
                     </li>`);
             });
             $sevice.append('<div class="clear"></div>');
