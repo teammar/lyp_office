@@ -998,3 +998,40 @@ footer a.social.google {
 		font-size: 14px;
 	}
 }
+
+#policy {
+	position: fixed;
+	top: 45px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 800px;
+	height: 500px;
+	margin: 0 auto;
+	background: #c8ffc8e0;
+	border: 3px solid powderblue;
+	border-radius: 5px;
+}
+
+#policy .content {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	padding: 30px 20px;
+}
+
+#policy .policy-close {
+	position: absolute;
+	top: 5px;
+	right: 25px;
+	background: red;
+	height: 17px;
+	width: 17px;
+	border-radius: 50%;
+	border: 2px solid lightpink;
+	cursor: pointer;
+}
+#policy .policy-close:hover {
+	background: hotpink;
+	border: 2px solid deeppink;
+}
