@@ -65,7 +65,7 @@ function newP(qq, describe) {
 }
 
 function getHistory() {
-    req({url: 'http://cdn.syyx.ffstu.cn/lyp/updateHistory.json'}).then(res => {
+    req({url: 'https://cdn.lyplus.cc/api.php?path=lyp/updateHistory.json'}).then(res => {
         let list = [];
         for (const ver of res.list.reverse()) {
             list.push({
