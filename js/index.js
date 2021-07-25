@@ -64,6 +64,40 @@ function newP(qq, describe) {
     });
 }
 
+function getHistory() {
+    req({url: 'http://cdn.syyx.ffstu.cn/lyp/updateHistory.json'}).then(res => {
+        let list = [];
+        for (const ver of res.list.reverse()) {
+            list.push({
+                pic: './img/logo.png',
+                name: res[ver].version + "-" + (compare(res[ver].version, '1.1.1.7') >= 0 ? 'bate' : 'alpha'),
+                downUri: res[ver].fullDown,
+                body: res[ver].describe
+            });
+        }
+        Promise.all(list).then(res => {
+            if (res && res.length > 0) {
+                let $sevice = $('.services-section .wrapper .services-list').empty();
+                res.forEach(item => {
+                    $sevice.append(`<li>
+                    <div class="image-container">
+                        <img src="${item.pic}" alt="${item.name}">
+                    </div>
+                    <h5>${item.name}</h5>
+                    <p style="text-align:left;" title="${item.body}">${item.body.substr(0, 100).replace(/\n/g, '<br>') + '...'}</p>
+                    <a href="https://api.iyk0.com/lzyjx/?url=${item.downUri}&type=down" target="_blank">下载</a>
+                    </li>`);
+                });
+                $sevice.append('<div class="clear"></div>');
+                $('#top #navigation .nav-cta').prop('href', `https://api.iyk0.com/lzyjx/?url=${res[0].downUri}&type=down`).prop('target', '_blank');
+                $('#banner .wrapper .buttons .button-1').prop('href', `https://api.iyk0.com/lzyjx/?url=${res[0].downUri}&type=down`).prop('target', '_blank');
+            }
+        }).catch(e => {
+            alert(e);
+        })
+    })
+}
+
 $(document).ready(function () {
 
     // 加载应用中心
@@ -72,35 +106,7 @@ $(document).ready(function () {
     });
 
     // 加载历史版本
-    Promise.all([{
-        pic: './img/logo.png',
-        name: '1.1.0-alpha',
-        downUri: "https://teammar.lanzoui.com/i8qmnqwzhni",
-        body: `修复如下：
-        1.修复了登录方式（滑块 -> 扫码）
-        2.修复了sdk报没有exui的错误
-        3.优化部分功能
-        `
-    }]).then(res => {
-        if (res && res.length > 0) {
-            let $sevice = $('.services-section .wrapper .services-list').empty();
-            res.forEach(item => {
-                $sevice.append(`<li>
-                    <div class="image-container">
-                        <img src="${item.pic}" alt="${item.name}">
-                    </div>
-                    <h5>${item.name}</h5>
-                    <p style="text-align:left;" title="${item.body}">${item.body.substr(0, 100).replace(/\n/g, '<br>') + '...'}</p>
-                    <a href="https://api.iyk0.com/lzyjx/?url=${item.downUri}&type=down" target="_blank">下载</a>
-                    </li>`);
-            });
-            $sevice.append('<div class="clear"></div>');
-            $('#top #navigation .nav-cta').prop('href', `https://api.iyk0.com/lzyjx/?url=${res[0].downUri}&type=down`).prop('target', '_blank');
-            $('#banner .wrapper .buttons .button-1').prop('href', `https://api.iyk0.com/lzyjx/?url=${res[0].downUri}&type=down`).prop('target', '_blank');
-        }
-    }).catch(e => {
-        alert(e);
-    })
+    getHistory();
 
     // 加载团队
     Promise.all([
@@ -160,6 +166,26 @@ $(document).ready(function () {
         });
     });
 });
+
+function compare(localVer, ver) {
+    var ls = localVer.split(".");
+    var vs = ver.split(".");
+    for (var idx in ls) {
+        if (ls[idx] && vs[idx]) {
+            if (parseInt(ls[idx]) > parseInt(vs[idx])) {
+                return 1;
+            } else if (parseInt(ls[idx]) < parseInt(vs[idx])) {
+                return -1;
+            }
+        } else if (ls[idx]) {
+            return 1;
+        } else if (vs[idx]) {
+            return -1;
+        }
+    }
+    return 0;
+
+}
 
 function getUserPolicy() {
     return `
