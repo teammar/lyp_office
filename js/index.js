@@ -140,11 +140,11 @@ $(document).ready(function () {
 
     // 加载小羽秀
     let pics = [
+        './img/starter.png',
         './img/login.png',
         './img/home.png',
         './img/log.png',
         './img/setting.png',
-        './img/console.png',
         './img/rabbit.png',
         './img/appstore.png',
     ]
