@@ -70,11 +70,12 @@ function getHistory() {
         for (const ver of res.list.reverse()) {
             list.push({
                 pic: './img/logo.png',
-                name: res[ver].version + "-" + (compare(res[ver].version, '1.1.1.7') >= 0 ? 'bate' : 'alpha'),
+                name: res[ver].version + (compare(res[ver].version, '1.1.1.7') >= 0 ? compare(res[ver].version, '1.1.2.3') >= 0 ? '' : '-beta' : '-alpha'),
                 downUri: res[ver].fullDown,
                 body: res[ver].describe
             });
         }
+        list = list.slice(0, 5);
         Promise.all(list).then(res => {
             if (res && res.length > 0) {
                 let $sevice = $('.services-section .wrapper .services-list').empty();
