@@ -75,7 +75,7 @@ function getHistory() {
                 body: res[ver].describe
             });
         }
-        list = list.slice(0, 5);
+        list = list.slice(0, 6);
         Promise.all(list).then(res => {
             if (res && res.length > 0) {
                 let $sevice = $('.services-section .wrapper .services-list').empty();
